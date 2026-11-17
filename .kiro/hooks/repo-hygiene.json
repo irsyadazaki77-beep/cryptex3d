@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Repo Hygiene Check",
+      "trigger": "SessionStart",
+      "description": "Verify .kiro is not in .gitignore and the root MIT LICENSE remains intact at session start.",
+      "action": {
+        "type": "command",
+        "command": "$root = \"c:\\Users\\zakii\\OneDrive\\Dokumen\\KIRO WADIDAW\"; $gitignore = \"$root\\.gitignore\"; if (Test-Path $gitignore) { $content = Get-Content $gitignore -Raw; if ($content -match '(^|\\n)\\s*\\.kiro\\s*($|\\n)') { Write-Error \"REPO HYGIENE FAIL: .kiro is listed in .gitignore — Kiro steering/specs/hooks will be excluded from version control. Remove it.\"; exit 1 } }; if (-not (Test-Path \"$root\\LICENSE\")) { Write-Error \"REPO HYGIENE FAIL: Root MIT LICENSE file is missing.\"; exit 1 }; Write-Host \"Repo hygiene OK: .kiro not in .gitignore, LICENSE present.\"",
+        "timeout": 15
+      }
+    }
+  ]
+}

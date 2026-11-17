@@ -1,0 +1,1115 @@
+{
+  "pbtResults": {
+    "17.3 Write property test for Worker non-blocking invariant (Property 7)": {
+      "status": "passed",
+      "lastRunTimestamp": 1794878143080
+    },
+    "17.1 Write property test for full pipeline round-trip fidelity (Property 1)": {
+      "status": "passed",
+      "lastRunTimestamp": 1794877161652
+    },
+    "3.2 Write property test for spatial key hash injectivity (Property 11)": {
+      "status": "passed",
+      "lastRunTimestamp": 1794878134058
+    },
+    "3.3 Write property test for spatial key sensitivity (Property 3)": {
+      "status": "passed",
+      "lastRunTimestamp": 1794878135511
+    },
+    "4.4 Write property test for AES-GCM round-trip (Property 1 partial)": {
+      "status": "passed",
+      "lastRunTimestamp": 1794878136517
+    },
+    "4.5 Write property test for wrong-key rejection (Property 2)": {
+      "status": "passed",
+      "lastRunTimestamp": 1794878137800
+    },
+    "6.4 Write property test for LSB round-trip (Property 9)": {
+      "status": "passed",
+      "lastRunTimestamp": 1794878139032
+    },
+    "6.5 Write property test for payload size guard (Property 5)": {
+      "status": "passed",
+      "lastRunTimestamp": 1794878139786
+    },
+    "6.6 Write property test for losslessness invariant (Property 6)": {
+      "status": "passed",
+      "lastRunTimestamp": 1794878141211
+    },
+    "6.7 Write property test for carrier integrity detection (Property 4)": {
+      "status": "passed",
+      "lastRunTimestamp": 1794878142028
+    }
+  },
+  "executionHistory": {
+    "1.1 Initialise Vite 6 project with React 19 and TypeScript strict-mode": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870554200
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870568320
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794874837923
+      }
+    ],
+    "1.2 Configure Vite bundle splitting, CSP, and gzip budget": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870554900
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870568541
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794874995269
+      }
+    ],
+    "1.3 Add MIT LICENSE file and skeleton README": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555006
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870568820
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794874838613
+      }
+    ],
+    "2.1 Define all TypeScript interfaces and implement VaultStore": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555099
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794874999796
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875067134
+      }
+    ],
+    "3.1 Implement SpatialKeySerializer (pure, no Three.js imports)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555154
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875071075
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875129970
+      }
+    ],
+    "4.1 Implement KeyDeriver": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555219
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875071490
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875130203
+      }
+    ],
+    "4.2 Implement Encryptor and Decryptor": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555323
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875139620
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875223092
+      }
+    ],
+    "4.3 Implement CryptoWorker message handler": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555376
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875230831
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875398749
+      }
+    ],
+    "5. Checkpoint — verify CryptoWorker and SpatialKeySerializer": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555428
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878515365
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878629927
+      }
+    ],
+    "6.1 Implement LSBEmbedder": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555485
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875139955
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875223741
+      }
+    ],
+    "6.2 Implement LSBExtractor": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555543
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875231464
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875398158
+      }
+    ],
+    "6.3 Implement StegoWorker message handler": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555602
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875404297
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875638705
+      }
+    ],
+    "7.1 Implement chi-square, Shannon entropy, and LSB-pair analyzers": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555661
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875232653
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875398035
+      }
+    ],
+    "7.2 Implement HeuristicScorer and AuditReportBuilder": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555725
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875404383
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875638093
+      }
+    ],
+    "7.3 Implement AuditorWorker message handler": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555785
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875645106
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875718591
+      }
+    ],
+    "8.1 Implement Worker manager with 30-second idle timeout": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555854
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875725520
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875838084
+      }
+    ],
+    "9. Checkpoint — verify all Workers": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555926
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878638807
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878923039
+      }
+    ],
+    "10.1 Implement SceneRoot with WebGL lifecycle management": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870555987
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875847835
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875997290
+      }
+    ],
+    "10.2 Implement ObsidianMonolith artifact": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556046
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876004825
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876135209
+      }
+    ],
+    "10.3 Implement CryptexRing artifact with 8 click-to-rotate segments": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556103
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876005084
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876136097
+      }
+    ],
+    "10.4 Implement EtherealCrystal artifact with hover glow": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556161
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876005779
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876136839
+      }
+    ],
+    "10.5 Implement OrbitControls wrapper and ArtifactRaycaster": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556221
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876145871
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876236674
+      }
+    ],
+    "10.6 Implement WebGLFallback component": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556282
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876146764
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876237337
+      }
+    ],
+    "10.7 Wire scene event emitter to SpatialKeySerializer": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556344
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876246629
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876404800
+      }
+    ],
+    "11.1 Implement P2PManager and SDPNegotiator": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556404
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875848372
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875997951
+      }
+    ],
+    "11.2 Implement DataChannelHandler with 16 KB chunking and backpressure": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556460
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876006778
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876138386
+      }
+    ],
+    "11.3 Implement BroadcastChannelFallback": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556513
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876007342
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876139049
+      }
+    ],
+    "12.1 Implement AudioEngine and AmbientSynthesizer": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556567
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875848935
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875998947
+      }
+    ],
+    "12.2 Implement SpatialMixer and TactileSFX": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556619
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876148760
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876238368
+      }
+    ],
+    "13.1 Implement EncryptPanel": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556686
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876414989
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876570164
+      }
+    ],
+    "13.2 Implement DecryptPanel": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556775
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876415326
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876570523
+      }
+    ],
+    "13.3 Implement AuditPanel": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556829
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876415418
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876571543
+      }
+    ],
+    "13.4 Implement P2PPanel": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556886
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876416158
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876572561
+      }
+    ],
+    "13.5 Implement SpatialKeyDisplay": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870556944
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876417080
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876573065
+      }
+    ],
+    "13.6 Implement pipeline status indicators and error display": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557002
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876579379
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876708338
+      }
+    ],
+    "14.1 Implement DemoModeOrchestrator component": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557059
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876714686
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876864072
+      }
+    ],
+    "15. Checkpoint — verify UI and demo mode": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557117
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878931012
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879664297
+      }
+    ],
+    "16.1 Write unit tests for key derivation determinism": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557174
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876871922
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876949252
+      }
+    ],
+    "16.2 Write unit tests for BitstreamLayout encoding": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557234
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876872670
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876950209
+      }
+    ],
+    "16.3 Write unit tests for SpatialKeySerializer hash stability": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557287
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876873572
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876951341
+      }
+    ],
+    "16.4 Write unit tests for LSB embed/extract with known byte sequences": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557343
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876874077
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876952808
+      }
+    ],
+    "17.1 Write property test for full pipeline round-trip fidelity (Property 1)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557396
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876970492
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794877190092
+      }
+    ],
+    "17.2 Write property test for Cryptex Ring segment cycling (Property 10)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557453
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876971612
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794877190321
+      }
+    ],
+    "17.3 Write property test for Worker non-blocking invariant (Property 7)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557503
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876975281
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794877191036
+      }
+    ],
+    "17.4 Write property test for no plaintext leakage (Property 8)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557558
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876976201
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794877192335
+      }
+    ],
+    "17.5 Confirm property tests 3.2, 3.3, 4.4, 4.5, 6.4, 6.5, 6.6, 6.7 are wired into Vitest": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557610
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794877193381
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878168733
+      }
+    ],
+    "18.1 Write integration test for full pipeline success path": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557670
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878175837
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878284514
+      }
+    ],
+    "18.2 Write integration test for spatial key mismatch rejection": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557727
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878177586
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878285537
+      }
+    ],
+    "18.3 Write integration test for pipeline latency budget": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557782
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878177865
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878286629
+      }
+    ],
+    "18.4 Write integration test for BroadcastChannel transfer": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557836
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878178922
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878287697
+      }
+    ],
+    "19.1 Update README with final architecture notes and run instructions": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557894
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878297349
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878506729
+      }
+    ],
+    "19.2 Verify MIT license and no-backend static build": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870557951
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878297930
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878507832
+      }
+    ],
+    "20. Final checkpoint — full test suite green": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794870558010
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879670181
+      },
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879839397
+      }
+    ],
+    "1. Project scaffolding and build configuration": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794874995396
+      }
+    ],
+    "2. Zustand VaultStore": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875067279
+      }
+    ],
+    "3. SpatialKeySerializer": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875130103
+      }
+    ],
+    "4. CryptoWorker (AES-256-GCM + PBKDF2)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875398812
+      }
+    ],
+    "6. StegoWorker (LSB embed/extract)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875638769
+      }
+    ],
+    "7. AuditorWorker (entropy audit)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875718646
+      }
+    ],
+    "8. Worker lifecycle management (idle timeout + restart)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794875838207
+      }
+    ],
+    "11. P2P transport layer": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876139123
+      }
+    ],
+    "12. Web Audio Engine": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876238455
+      }
+    ],
+    "10. Three.js scene": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876404914
+      }
+    ],
+    "13. React HUD panels": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876708414
+      }
+    ],
+    "14. DemoModeOrchestrator (Judge Demo Mode)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876864467
+      }
+    ],
+    "16. Unit tests": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794876952937
+      }
+    ],
+    "17. Property-based tests": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878168845
+      }
+    ],
+    "18. Integration tests": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878287844
+      }
+    ],
+    "19. Final README update and repo hygiene": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794878507959
+      }
+    ],
+    "3.2 Write property test for spatial key hash injectivity (Property 11)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879851339
+      }
+    ],
+    "3.3 Write property test for spatial key sensitivity (Property 3)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879852641
+      }
+    ],
+    "4.4 Write property test for AES-GCM round-trip (Property 1 partial)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879853883
+      }
+    ],
+    "4.5 Write property test for wrong-key rejection (Property 2)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879854348
+      }
+    ],
+    "6.4 Write property test for LSB round-trip (Property 9)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879855792
+      }
+    ],
+    "6.5 Write property test for payload size guard (Property 5)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879856057
+      }
+    ],
+    "6.6 Write property test for losslessness invariant (Property 6)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879857509
+      }
+    ],
+    "6.7 Write property test for carrier integrity detection (Property 4)": [
+      {
+        "executionId": "90498869-21a0-47b1-a311-78ed262411fa",
+        "chatSessionId": "sess_6c0623dd-8f1f-40b2-a625-ad5a5a576bab",
+        "timestamp": 1794879857661
+      }
+    ]
+  }
+}
