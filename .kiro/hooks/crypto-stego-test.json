@@ -1,16 +1,16 @@
-{
-  "version": "v1",
-  "hooks": [
-    {
-      "name": "Crypto/Stego Test Runner",
-      "trigger": "PostFileSave",
-      "description": "Run vitest in single-pass mode whenever a file in src/core/crypto/ or src/core/stego/ is saved, to catch regressions immediately without blocking the agent.",
-      "matcher": "src/core/(crypto|stego)/.*",
-      "action": {
-        "type": "command",
-        "command": "cd \"c:\\Users\\zakii\\OneDrive\\Dokumen\\KIRO WADIDAW\" && npx vitest --run --reporter=verbose 2>&1 | tail -30",
-        "timeout": 60
-      }
-    }
-  ]
+﻿{
+    "version":  "v1",
+    "hooks":  [
+                  {
+                      "matcher":  "src/core/(crypto|stego)/.*",
+                      "description":  "Run vitest in single-pass mode whenever a file in src/core/crypto/ or src/core/stego/ is saved, to catch regressions immediately without blocking the agent.",
+                      "name":  "Crypto/Stego Test Runner",
+                      "action":  {
+                                     "command":  "npx vitest --run",
+                                     "timeout":  300,
+                                     "type":  "command"
+                                 },
+                      "trigger":  "PostFileSave"
+                  }
+              ]
 }

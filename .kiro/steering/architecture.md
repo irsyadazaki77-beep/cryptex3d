@@ -57,3 +57,12 @@ Cryptex3D is divided into four strictly separated layers. No layer may import fr
 - **No secrets in the render layer**: passphrase and derived key material must never reach `src/scene/` or `src/components/`.
 - **TypeScript strict mode** (`"strict": true`) must be enabled project-wide; `any` casts require an inline `// eslint-disable` comment with justification.
 - **Vite code-splitting**: each major module (`scene`, `crypto`, `stego`, `auditor`, `p2p`, `audio`) must be a dynamic import chunk to keep initial bundle < 150 KB.
+
+## Scene Post-Processing and HUD Bridge (added with the UI overhaul)
+
+- `src/scene/postFx.ts` owns the `EffectComposer` (`RenderPass` -> `UnrealBloomPass` -> `OutputPass`). The bloom threshold is 1.0, so only HDR emissive colours (> 1) glow: rune strokes, pedestal rims, ring markers, the crystal core.
+- `src/scene/adaptiveQuality.ts` permanently disables bloom when more than half of a 120-frame window exceeds `FRAME_BUDGET_MS` or runs below ~30 fps. The composer and every pass are disposed in the `SceneRoot` teardown.
+- The render loop and the HUD share exactly one signal: `src/scene/sceneSignals.ts` (a boolean, no secrets, no React, no Three.js). The HUD writes it from `PipelineStatusIndicator`; the loop reads it once per frame.
+- `SceneRoot` handles `webglcontextlost`: it pauses the loop, waits 4 s for `webglcontextrestored` (then remounts a fresh canvas), and otherwise renders `WebGLFallback`.
+- The procedural reflection environment (`RoomEnvironment` through `PMREMGenerator`) is generated once and registered for disposal. No external HDRI.
+- UI panels are mounted by `src/components/CommandDock.tsx`. Panels stay mounted after first visit (hidden, not unmounted) so P2P connections survive tab switches.

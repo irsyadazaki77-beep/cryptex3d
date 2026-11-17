@@ -74,3 +74,11 @@ Cryptex3D is a **dark-mode glassmorphic HUD**. The visual language combines a de
 - No "fun" or playful micro-copy — all text is precise and functional.
 - No comic sans, papyrus, or display fonts.
 - No light-mode variant — this application is dark-mode only.
+
+## Command Dock and Zen Mode (added with the UI overhaul)
+
+- The four mode panels (Encrypt, Decrypt, P2P Drop, AI Audit) live in a single right-hand Command Dock, `max-w-[390px]`, `bg-[#0a0f1d]/75`, `backdrop-blur-xl`, with a cyan hairline border. It is the only large HUD surface.
+- A top-right Zen toggle hides the dock so the 3D scene owns the viewport. It stays visible at all times.
+- Micro-HUDs: top-centre brand pill, pipeline status and errors; bottom-left compact Spatial Key readout; bottom-centre Judge Demo Mode with its five-step stepper (Encrypt, Audit, P2P Sync, 3D Unlock, Decrypt).
+- Fonts are bundled locally (`@fontsource-variable/inter`, `@fontsource/jetbrains-mono`). Vite `assetsInlineLimit` is 0 so no `data:` URIs are produced under the CSP.
+- Shared control styles live in `src/components/hudStyles.ts`. Buttons are flat solid colour (no gradients) and use `rounded-lg`.

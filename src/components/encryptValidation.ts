@@ -20,3 +20,12 @@ export function validatePassphrase(passphrase: string): string | null {
   if (len < MIN_PASSPHRASE_LENGTH || len > MAX_PASSPHRASE_LENGTH) return PASSPHRASE_LENGTH_MESSAGE;
   return null;
 }
+
+/** Horcrux Mode keeps the WAV shard to roughly 12 s of audio. Mirrors HORCRUX_MAX_SECRET_BYTES in the crypto layer. */
+export const MAX_HORCRUX_FILE_BYTES = 65_536;
+export const HORCRUX_TOO_LARGE_MESSAGE = 'Horcrux Mode supports files up to 64 KB';
+
+/** Returns an error message, or null when the file fits Horcrux Mode. */
+export function validateHorcruxSize(byteLength: number): string | null {
+  return byteLength > MAX_HORCRUX_FILE_BYTES ? HORCRUX_TOO_LARGE_MESSAGE : null;
+}

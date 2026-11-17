@@ -1,11 +1,13 @@
 import { useRef, useState, type ChangeEvent, type DragEvent } from 'react';
-import { FileUp, Lock } from 'lucide-react';
-import { HudPanel } from './HudPanel';
+import { FileUp, Flame, Lock, Network } from 'lucide-react';
+import { HudPanel, HudSwitch } from './HudPanel';
 import { useVaultStore } from '../store/vaultStore';
-import { validateFileSize, validatePassphrase } from './encryptValidation';
+import { validateFileSize, validateHorcruxSize, validatePassphrase } from './encryptValidation';
 import { btnPrimary, inputCls, labelCls } from './hudStyles';
+import { TTL_OPTIONS, formatExpiry, ttlFor } from './ttlOptions';
+import { HorcruxShardList } from './HorcruxShardList';
 
-/** Encrypt & embed panel: file drop zone, passphrase, dispatch to the vault store. */
+/** Encrypt & embed panel: file drop zone, passphrase, dead-drop options, dispatch to the vault store. */
 export function EncryptPanel() {
   const dispatchEncryptEmbed = useVaultStore((s) => s.dispatchEncryptEmbed);
   const state = useVaultStore((s) => s.encryptStatus.state);
@@ -14,10 +16,19 @@ export function EncryptPanel() {
   const [fileError, setFileError] = useState<string | null>(null);
   const [passphrase, setPassphrase] = useState('');
   const [dragging, setDragging] = useState(false);
+  const [horcrux, setHorcrux] = useState(false);
+  const [ttlId, setTtlId] = useState('none');
+  const [armedExpiry, setArmedExpiry] = useState<number | null>(null);
 
   const busy = state !== 'idle' && state !== 'complete' && state !== 'error';
   const passphraseError = passphrase.length > 0 ? validatePassphrase(passphrase) : null;
-  const canSubmit = file !== null && fileError === null && validatePassphrase(passphrase) === null && !busy;
+  const modeError = file && horcrux ? validateHorcruxSize(file.size) : null;
+  const canSubmit =
+    file !== null &&
+    fileError === null &&
+    modeError === null &&
+    validatePassphrase(passphrase) === null &&
+    !busy;
 
   const acceptFile = (f: File | undefined): void => {
     if (!f) return;
@@ -25,25 +36,27 @@ export function EncryptPanel() {
     setFileError(err);
     setFile(err ? null : f);
   };
-
   const onDrop = (e: DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
     setDragging(false);
     acceptFile(e.dataTransfer.files[0]);
   };
-
   const onInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     acceptFile(e.target.files?.[0]);
     e.target.value = '';
   };
-
   const onSubmit = async (): Promise<void> => {
     if (!canSubmit || !file) return;
     const bytes = new Uint8Array(await file.arrayBuffer());
     const secret = passphrase;
+    const ttlMs = ttlFor(ttlId);
     setPassphrase('');
-    await dispatchEncryptEmbed(bytes, secret);
+    // Horcrux sets announce their own expiry inside the shard list.
+    setArmedExpiry(ttlMs === undefined || horcrux ? null : Date.now() + ttlMs);
+    await dispatchEncryptEmbed(bytes, secret, { ttlMs, horcrux });
   };
+
+  const shownError = fileError ?? modeError;
 
   return (
     <HudPanel title="Encrypt" icon={<Lock size={16} />} className="w-full">
@@ -72,12 +85,11 @@ export function EncryptPanel() {
           </span>
           <input ref={inputRef} type="file" className="hidden" onChange={onInputChange} />
         </div>
-        {fileError && (
+        {shownError && (
           <p role="alert" className="text-sm text-rose-400">
-            {fileError}
+            {shownError}
           </p>
         )}
-
         <label className={labelCls}>
           Passphrase
           <input
@@ -98,14 +110,51 @@ export function EncryptPanel() {
           </p>
         )}
 
+        <fieldset className="m-0 flex flex-col gap-2 border-0 p-0" disabled={busy}>
+          <legend className="mb-1 p-0 text-xs uppercase tracking-widest text-slate-200/55">
+            Dead-drop options
+          </legend>
+          <HudSwitch
+            checked={horcrux}
+            onChange={setHorcrux}
+            label="Horcrux Mode"
+            description="Split 2-of-3 across PNG, WAV and a ring-bound token (up to 64 KB)"
+            icon={<Network size={16} />}
+          />
+          <label className={`${labelCls} gap-1`}>
+            <span className="flex items-center gap-2">
+              <Flame size={16} aria-hidden="true" /> Self-destruct
+            </span>
+            <select
+              value={ttlId}
+              onChange={(e) => setTtlId(e.target.value)}
+              className={`${inputCls} h-11 font-sans`}
+              aria-label="Self-destruct timer"
+            >
+              {TTL_OPTIONS.map((o) => (
+                <option key={o.id} value={o.id} className="bg-slate-950">
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </fieldset>
+
         <button
           type="button"
           disabled={!canSubmit}
           onClick={() => void onSubmit()}
           className={btnPrimary}
         >
-          Encrypt &amp; Embed
+          {horcrux ? 'Seal Horcrux' : 'Encrypt & Embed'}
         </button>
+
+        {state === 'complete' && armedExpiry !== null && (
+          <p className="m-0 rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-1 text-sm text-amber-400">
+            Self-destructs {formatExpiry(armedExpiry)}. After that this drop refuses to decrypt.
+          </p>
+        )}
+        <HorcruxShardList />
       </div>
     </HudPanel>
   );

@@ -1,7 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AlertTriangle, Copy, Radio, Send, Repeat } from 'lucide-react';
+import { AlertTriangle, Copy, ExternalLink, Radio, Send, Repeat } from 'lucide-react';
 import { HudPanel } from './HudPanel';
-import { btnPrimary, btnSecondary, labelCls, textareaCls } from './hudStyles';
+import {
+  badgeSuccess,
+  badgeWarning,
+  btnPrimary,
+  btnSecondary,
+  labelCls,
+  textareaCls,
+} from './hudStyles';
 import { useVaultStore } from '../store/vaultStore';
 import {
   TIMEOUT_MESSAGE,
@@ -277,6 +284,18 @@ function P2PContent() {
   };
 
   const canSend = !!stegoCarrier && (transport === 'broadcast' || channelOpen);
+  const bcSupported = typeof BroadcastChannel !== 'undefined';
+  const bcLabel = !bcSupported
+    ? 'BroadcastChannel unavailable'
+    : p2pStatus.mode === 'broadcast-received'
+      ? 'BroadcastChannel: carrier received'
+      : transport === 'broadcast'
+        ? 'BroadcastChannel: listening'
+        : 'BroadcastChannel: standby';
+  const openReceiverTab = () => {
+    // noopener: the receiver tab needs no handle on this window; BroadcastChannel is same-origin.
+    window.open(window.location.href, '_blank', 'noopener');
+  };
   const pct = progressPercent(progress.transferred, progress.total);
   const widthCls = progressWidthClass(progress.transferred, progress.total);
 
@@ -318,6 +337,26 @@ function P2PContent() {
         </label>
       </div>
 
+      <div className="flex flex-col gap-2 rounded-lg border border-slate-700/60 bg-slate-950/40 p-3">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span
+            role="status"
+            className={bcSupported && transport === 'broadcast' ? badgeSuccess : badgeWarning}
+          >
+            <Radio size={16} />
+            {bcLabel}
+          </span>
+          <button type="button" className={btnSecondary} onClick={openReceiverTab}>
+            <ExternalLink size={16} />
+            Open Receiver Tab
+          </button>
+        </div>
+        <p className="m-0 text-xs text-slate-200/55">
+          Test a transfer alone: open a receiver tab, then enable Same-Device Mode in P2P Drop on
+          both tabs. Encrypt in this tab, press Send carrier, and the carrier appears in the
+          receiver&apos;s Decrypt tab.
+        </p>
+      </div>
       {!webrtcAvailable && (
         <p className="rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-1 text-sm text-amber-400">
           WebRTC is unavailable. Using same-device BroadcastChannel.

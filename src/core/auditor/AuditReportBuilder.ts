@@ -43,5 +43,6 @@ export function buildAuditReport(r: HeuristicResult): AuditReport {
     recommendation: truncate(buildRecommendation(score), MAX_RECOMMENDATION_CHARS),
     shannonEntropy: r.shannonEntropy,
     chiSquarePValue: r.chiSquarePValue,
+    lsbPairAnomaly: Number.isFinite(r.lsbPairAnomaly) ? Math.min(1, Math.max(0, r.lsbPairAnomaly)) : 0,
   };
 }

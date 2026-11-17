@@ -5,6 +5,8 @@ import { ShieldCheck } from 'lucide-react';
 const SceneRoot = lazy(() => import('./scene/SceneRoot'));
 import { PipelineStatusIndicator } from './components/PipelineStatusIndicator';
 import { ErrorBanner } from './components/ErrorBanner';
+import { XRayLensToggle } from './components/XRayLensToggle';
+import { SceneBridgeEffects } from './components/SceneBridgeEffects';
 
 /**
  * Lazily load audio. The engine creates its AudioContext on the first user
@@ -31,12 +33,9 @@ function useLazyAudio(): void {
   }, []);
 }
 
-const EncryptPanel = lazy(() => import('./components/EncryptPanel'));
-const DecryptPanel = lazy(() => import('./components/DecryptPanel'));
-const AuditPanel = lazy(() => import('./components/AuditPanel'));
-const P2PPanel = lazy(() => import('./components/P2PPanel'));
 const DemoModeOrchestrator = lazy(() => import('./components/DemoModeOrchestrator'));
 const SpatialKeyDisplay = lazy(() => import('./components/SpatialKeyDisplay'));
+const CommandDock = lazy(() => import('./components/CommandDock'));
 
 export default function App() {
   useLazyAudio();
@@ -45,27 +44,21 @@ export default function App() {
       <Suspense fallback={null}>
         <SceneRoot />
       </Suspense>
-
       {/* HUD overlay: floats above the canvas; only its panels capture pointer events. */}
       <div className="pointer-events-none absolute inset-0 z-10">
-        {/* Left column: collapsed panels are compact icon + label strips. */}
-        <div className="hud-scroll absolute left-0 top-0 flex max-h-[calc(100vh-8rem)] w-72 flex-col gap-3 overflow-y-auto p-4 lg:w-80">
-          <Suspense fallback={null}>
-            <EncryptPanel />
-            <DecryptPanel />
-          </Suspense>
+        <SceneBridgeEffects />
+        {/* Top left: X-Ray LSB Lens. */}
+        <div className="absolute left-0 top-0 p-4">
+          <XRayLensToggle />
         </div>
-        {/* Right column */}
-        <div className="hud-scroll absolute right-0 top-0 flex max-h-[calc(100vh-8rem)] w-72 flex-col gap-3 overflow-y-auto p-4 lg:w-80">
-          <Suspense fallback={null}>
-            <AuditPanel />
-            <P2PPanel />
-          </Suspense>
-        </div>
-        {/* Top centre: brand badge, pipeline status and errors */}
-        <div className="absolute left-1/2 top-0 flex w-72 -translate-x-1/2 flex-col items-center gap-3 p-4">
-          <div className="pointer-events-none flex items-center gap-2 rounded-lg border border-indigo-400/20 bg-[#0a0f1e]/60 px-3 py-1.5 text-xs font-medium uppercase tracking-widest text-slate-200/80 shadow-[0_8px_32px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-xl">
-            <ShieldCheck size={16} className="text-indigo-300" />
+        {/* Right: tabbed Command Dock + Zen toggle (hides the dock). */}
+        <Suspense fallback={null}>
+          <CommandDock />
+        </Suspense>
+        {/* Top centre: brand pill, live pipeline status and non-blocking errors. */}
+        <div className="absolute left-1/2 top-0 flex w-72 -translate-x-1/2 flex-col items-center gap-3 p-4 lg:w-80">
+          <div className="pointer-events-none flex items-center gap-2 rounded-lg border border-cyan-400/25 bg-[#0a0f1d]/60 px-3 py-1.5 text-xs font-medium uppercase tracking-widest text-slate-200/80 shadow-[0_8px_32px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-xl">
+            <ShieldCheck size={16} className="text-cyan-300" />
             <span className="whitespace-nowrap">Cryptex3D // Spatial Crypto Vault</span>
           </div>
           <div className="flex w-full flex-col gap-3">
@@ -73,12 +66,13 @@ export default function App() {
             <ErrorBanner />
           </div>
         </div>
-        {/* Bottom left: spatial key */}
-        <div className="absolute bottom-0 left-0 w-72 p-4 lg:w-80">
+        {/* Bottom left: compact spatial key readout. */}
+        <div className="absolute bottom-0 left-0 w-80 max-w-full p-4">
           <Suspense fallback={null}>
             <SpatialKeyDisplay />
           </Suspense>
         </div>
+        {/* Bottom centre: Judge Demo Mode pill and stepper. */}
         <div
           id="demo-mode-slot"
           data-slot="demo-mode-orchestrator"

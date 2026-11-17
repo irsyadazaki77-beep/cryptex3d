@@ -39,6 +39,8 @@ export interface AuditReport {
   recommendation: string;
   shannonEntropy: number;
   chiSquarePValue: number;
+  /** RS-estimated fraction of LSB-embedded samples, 0-1 (payload density estimate). */
+  lsbPairAnomaly?: number;
 }
 
 export type P2PMode =
@@ -84,6 +86,9 @@ export type WorkerErrorCode =
   | 'PAYLOAD_TOO_LARGE'
   | 'INVALID_INPUT'
   | 'AUDIT_FAIL'
+  | 'EXPIRED'
+  | 'INSUFFICIENT_SHARDS'
+  | 'HORCRUX_TOO_LARGE'
   | 'INTERNAL';
 
 export type WorkerTarget = 'crypto' | 'stego' | 'auditor';
@@ -120,3 +125,34 @@ export type WorkerMessage<TPayload = unknown> =
       code: WorkerErrorCode;
       message: string;
     };
+
+export type ShardKind = 'png' | 'wav' | 'token';
+
+/** A shard file loaded for recovery. `bytes` is wiped when the tripwire fires. */
+export interface LoadedShard {
+  id: string;
+  kind: ShardKind;
+  name: string;
+  bytes: Uint8Array;
+}
+
+/** The three exportable shards produced by Horcrux Mode. */
+export interface HorcruxShardSet {
+  /** Shard 1: lossless PNG whose LSBs hold the shard (Obsidian Monolith). */
+  monolithPng: Uint8Array;
+  /** Shard 2: PCM WAV whose sample LSBs hold the shard (Ethereal Crystal). */
+  crystalWav: Uint8Array;
+  /** Shard 3: encrypted JSON token bound to the Cryptex Ring positions. */
+  ringToken: Uint8Array;
+  /** Hex id shared by the three shards. */
+  setId: string;
+  /** TTL as epoch milliseconds, or null for none. */
+  expiresAt: number | null;
+}
+
+export interface EncryptOptions {
+  /** Self-destruct after this many milliseconds. Omit for no expiry. */
+  ttlMs?: number;
+  /** Split the secret across PNG, WAV and a ring-bound token (2-of-3). */
+  horcrux?: boolean;
+}

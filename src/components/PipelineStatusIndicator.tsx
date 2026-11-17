@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
+import { setPipelineActive } from '../scene/sceneSignals';
 import { useVaultStore } from '../store/vaultStore';
 import type { PipelineState } from '../store/types';
 
@@ -24,7 +26,13 @@ export function PipelineStatusIndicator() {
   const labels = [activeLabel(encryptState), activeLabel(decryptState)].filter(
     (l): l is PipelineState => l !== null,
   );
-  if (labels.length === 0) return null;
+  const active = labels.length > 0;
+  // Tell the render loop (no React state involved) so the vault glows while work is running.
+  useEffect(() => {
+    setPipelineActive(active);
+    return () => setPipelineActive(false);
+  }, [active]);
+  if (!active) return null;
   return (
     <div
       role="status"

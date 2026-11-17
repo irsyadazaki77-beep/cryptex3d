@@ -1,16 +1,22 @@
 /**
  * SceneRoot: mounts the WebGLRenderer, runs the rAF loop, handles resize, and disposes
  * every GPU resource on unmount. The render loop never touches React state; it talks to
- * the rest of the app through `registry.events` (an EventTarget).
+ * the rest of the app through `registry.events` (an EventTarget) and `sceneSignals`.
  */
 import { useEffect, useRef, useState } from 'react';
 import type { RefObject } from 'react';
 import * as THREE from 'three';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import './scene.css';
 import WebGLFallback from './WebGLFallback';
 import { SpatialKeySerializer } from './SpatialKeySerializer';
 import { DEFAULT_ARTIFACTS } from './defaultArtifacts';
 import { fitCameraDistance } from './cameraFraming';
+import { createVaultEnvironment } from './environment';
+import { createPostFx, type PostFx } from './postFx';
+import { AdaptiveQuality } from './adaptiveQuality';
+import { isPipelineActive } from './sceneSignals';
+import { getGlitchLevel } from './sceneBridge';
 import {
   SCENE_FRAME_OVERRUN_EVENT,
   SCENE_READY_EVENT,
@@ -22,46 +28,9 @@ import {
 export const VOID_BACKGROUND = 0x060810;
 /** Main-thread budget per frame for scene work (callbacks + render submit). */
 export const FRAME_BUDGET_MS = 4;
-
-const DUST_COUNT = 280;
-/** Radians per millisecond (~one revolution every 7 minutes). */
-const DUST_DRIFT_PER_MS = 0.000015;
-
-/** Seeded LCG so the field looks identical across loads (visual only, not security-relevant). */
-function createDustField(count: number): {
-  points: THREE.Points;
-  geometry: THREE.BufferGeometry;
-  material: THREE.PointsMaterial;
-} {
-  let seed = 0x2f6e2b1;
-  const rand = (): number => {
-    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-    return seed / 0x100000000;
-  };
-  const positions = new Float32Array(count * 3);
-  for (let i = 0; i < count; i++) {
-    // Uniform direction on a sphere, radius 12-30 so dust surrounds the framed artifacts.
-    const u = rand() * 2 - 1;
-    const theta = rand() * Math.PI * 2;
-    const s = Math.sqrt(1 - u * u);
-    const r = 12 + rand() * 18;
-    positions[i * 3] = r * s * Math.cos(theta);
-    positions[i * 3 + 1] = r * u;
-    positions[i * 3 + 2] = r * s * Math.sin(theta);
-  }
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const material = new THREE.PointsMaterial({
-    color: 0xa5b4fc,
-    size: 0.12,
-    sizeAttenuation: true,
-    transparent: true,
-    opacity: 0.45,
-    depthWrite: false,
-    fog: false,
-  });
-  return { points: new THREE.Points(geometry, material), geometry, material };
-}
+/** How long to wait for the browser to restore a lost WebGL context before giving up. */
+export const CONTEXT_RESTORE_TIMEOUT_MS = 4000;
+export const CONTEXT_LOST_REASON = 'WEBGL_CONTEXT_LOST';
 
 export interface SceneRootProps {
   /** Receives the scene event emitter once mounted (and null after unmount). */
@@ -82,7 +51,9 @@ export default function SceneRoot({
 }: SceneRootProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [webglUnavailable, setWebglUnavailable] = useState(false);
-
+  const [fallbackReason, setFallbackReason] = useState<string | undefined>(undefined);
+  /** Bumped to remount a fresh canvas + renderer after the context is restored. */
+  const [epoch, setEpoch] = useState(0);
   // Latest props without re-creating the renderer when callers pass new identities.
   const propsRef = useRef({ eventsRef, onSceneReady, artifacts, onWebGLUnavailable });
   propsRef.current = { eventsRef, onSceneReady, artifacts, onWebGLUnavailable };
@@ -90,7 +61,6 @@ export default function SceneRoot({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     let renderer: THREE.WebGLRenderer;
     try {
       const gl = canvas.getContext('webgl2');
@@ -101,23 +71,31 @@ export default function SceneRoot({
       propsRef.current.onWebGLUnavailable?.();
       return;
     }
-
     renderer.setClearColor(VOID_BACKGROUND, 1);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.15;
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(VOID_BACKGROUND);
     scene.fog = new THREE.FogExp2(VOID_BACKGROUND, 0.035);
     const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-
     const registry = new SceneRegistry(scene);
+
+    // Procedural reflection environment so metallic artifacts have something to mirror (no external HDRI).
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const envScene = new RoomEnvironment();
+    const envTarget = pmrem.fromScene(envScene, 0.04);
+    scene.environment = envTarget.texture;
+    scene.environmentIntensity = 0.35;
+    registry.registerDisposable(envTarget);
+    envScene.dispose();
+    pmrem.dispose();
+
     // Obsidian Cyber-Vault lighting: deep indigo ambient, cool key, cyan rim, violet underfill.
     const ambient = new THREE.AmbientLight(0x312e81, 0.5);
     const key = new THREE.DirectionalLight(0xe0f2fe, 1.8);
     key.position.set(5, 6, 6);
-    const rim = new THREE.DirectionalLight(0x22d3ee, 2.2);
+    const rim = new THREE.DirectionalLight(0x22d3ee, 1.1);
     rim.position.set(-4, 3, -6);
     const fill = new THREE.PointLight(0xa855f7, 40, 0, 2);
     fill.position.set(-5, -3, 2);
@@ -125,17 +103,23 @@ export default function SceneRoot({
     registry.add(key);
     registry.add(rim);
     registry.add(fill);
-    // Ambient dust: static seeded points with a very slow drift (one rotation write per frame).
-    const dust = createDustField(DUST_COUNT);
-    registry.add(dust.points, dust.geometry, dust.material);
-    registry.onFrame((delta) => {
-      dust.points.rotation.y += delta * DUST_DRIFT_PER_MS;
-    });
+
+    const environment = createVaultEnvironment(registry);
+
+    let postFx: PostFx | null = null;
+    let bloomActive = true;
+    try {
+      postFx = createPostFx(renderer, scene, camera, 1, 1);
+    } catch {
+      postFx = null; // plain renderer path below
+    }
+    const quality = new AdaptiveQuality(FRAME_BUDGET_MS);
 
     const resize = (): void => {
       const w = Math.max(1, canvas.clientWidth || window.innerWidth);
       const h = Math.max(1, canvas.clientHeight || window.innerHeight);
       renderer.setSize(w, h, false); // false: never write inline styles (CSP)
+      postFx?.setSize(w, h);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       // Keep all three artifacts framed; preserve the current orbit direction.
@@ -148,17 +132,14 @@ export default function SceneRoot({
     observer.observe(canvas);
 
     const cleanups: Array<() => void> = [];
-
     // Attach before artifacts mount so their initial state emits are serialized.
     const serializer = new SpatialKeySerializer();
     serializer.attach(registry.events);
     cleanups.push(() => serializer.detach());
-
     for (const factory of propsRef.current.artifacts ?? DEFAULT_ARTIFACTS) {
       const cleanup = factory({ registry, scene, camera, canvas, events: registry.events });
       if (typeof cleanup === 'function') cleanups.push(cleanup);
     }
-
     const evRef = propsRef.current.eventsRef;
     if (evRef) evRef.current = registry.events;
     propsRef.current.onSceneReady?.(registry);
@@ -166,14 +147,29 @@ export default function SceneRoot({
 
     let rafId = 0;
     let last = performance.now();
+    let activity = 0;
+    let running = true;
     const loop = (now: number): void => {
+      if (!running) return;
       rafId = requestAnimationFrame(loop);
       const start = performance.now();
       const delta = now - last;
       last = now;
+      // Ease the pipeline-activity signal (0..1) so glow changes never snap.
+      const target = isPipelineActive() ? 1 : 0;
+      activity += (target - activity) * (1 - Math.exp(-delta / 300));
+      environment.update(delta, now, activity);
       registry.runFrame(delta, now);
-      renderer.render(scene, camera);
+      if (postFx && bloomActive) {
+        postFx.setActivity(activity);
+        postFx.setGlitch(getGlitchLevel());
+        postFx.render(delta / 1000);
+      } else {
+        renderer.render(scene, camera);
+      }
       const elapsed = performance.now() - start;
+      quality.record(elapsed, delta);
+      if (bloomActive && !quality.bloomEnabled) bloomActive = false;
       if (elapsed > FRAME_BUDGET_MS) {
         registry.events.dispatchEvent(
           new CustomEvent<FrameOverrunDetail>(SCENE_FRAME_OVERRUN_EVENT, {
@@ -184,17 +180,49 @@ export default function SceneRoot({
     };
     rafId = requestAnimationFrame(loop);
 
-    return () => {
+    // WebGL context loss: pause, wait for restore, then remount; otherwise show the fallback.
+    let restoreTimer: ReturnType<typeof setTimeout> | undefined;
+    const onContextLost = (e: Event): void => {
+      e.preventDefault(); // required for the browser to attempt restoration
+      running = false;
       cancelAnimationFrame(rafId);
+      restoreTimer = setTimeout(() => {
+        setFallbackReason(CONTEXT_LOST_REASON);
+        setWebglUnavailable(true);
+        propsRef.current.onWebGLUnavailable?.();
+      }, CONTEXT_RESTORE_TIMEOUT_MS);
+    };
+    const onContextRestored = (): void => {
+      if (restoreTimer !== undefined) clearTimeout(restoreTimer);
+      restoreTimer = undefined;
+      setEpoch((n) => n + 1); // fresh canvas + renderer + resources
+    };
+    canvas.addEventListener('webglcontextlost', onContextLost);
+    canvas.addEventListener('webglcontextrestored', onContextRestored);
+
+    return () => {
+      running = false;
+      cancelAnimationFrame(rafId);
+      if (restoreTimer !== undefined) clearTimeout(restoreTimer);
+      canvas.removeEventListener('webglcontextlost', onContextLost);
+      canvas.removeEventListener('webglcontextrestored', onContextRestored);
       observer.disconnect();
       for (const c of cleanups) c();
       registry.disposeAll();
+      postFx?.dispose();
       renderer.dispose();
       const ref = propsRef.current.eventsRef;
       if (ref && ref.current === registry.events) ref.current = null;
     };
-  }, []);
+  }, [epoch]);
 
-  if (webglUnavailable) return <WebGLFallback />;
-  return <canvas ref={canvasRef} className="scene-canvas" aria-label="Cryptex3D vault scene" />;
+  if (webglUnavailable) return <WebGLFallback reason={fallbackReason} />;
+  return (
+    <canvas
+      key={epoch}
+      ref={canvasRef}
+      className="scene-canvas"
+      aria-label="Cryptex3D vault scene"
+    />
+  );
 }

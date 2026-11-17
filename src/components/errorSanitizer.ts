@@ -7,7 +7,11 @@ import {
   AUTH_FAIL_MESSAGE,
   BAD_MAGIC_MESSAGE,
   CHECKSUM_FAIL_MESSAGE,
+  EXPIRED_MESSAGE,
+  INSUFFICIENT_SHARDS_MESSAGE,
+  TRIPWIRE_MESSAGE,
 } from './decryptLogic';
+import { HORCRUX_TOO_LARGE_MESSAGE } from './encryptValidation';
 
 export const GENERIC_ERROR_TEXT = 'An error occurred. The operation could not be completed.';
 
@@ -21,6 +25,10 @@ const KNOWN_MESSAGES: Readonly<Record<string, string>> = {
   PAYLOAD_TOO_LARGE: 'File too large — maximum is 250 KB',
   INVALID_INPUT: 'The supplied input is invalid.',
   AUDIT_FAIL: 'Audit could not be completed',
+  EXPIRED: EXPIRED_MESSAGE,
+  TRIPWIRE: TRIPWIRE_MESSAGE,
+  INSUFFICIENT_SHARDS: INSUFFICIENT_SHARDS_MESSAGE,
+  HORCRUX_TOO_LARGE: HORCRUX_TOO_LARGE_MESSAGE,
   INTERNAL: GENERIC_ERROR_TEXT,
   // Fixed sentences the store emits itself.
   'Pipeline workers are not initialised.': 'Pipeline workers are not initialised.',

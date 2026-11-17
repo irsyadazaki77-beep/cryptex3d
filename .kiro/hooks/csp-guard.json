@@ -1,0 +1,16 @@
+﻿{
+    "version":  "v1",
+    "hooks":  [
+                  {
+                      "matcher":  "src/.*\\.(tsx|ts)|index\\.html",
+                      "description":  "Fail fast when a saved UI or scene file introduces an inline style attribute or DOM style mutation, which the production CSP blocks.",
+                      "name":  "CSP Inline-Style Guard",
+                      "action":  {
+                                     "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File .kiro/hooks/csp-guard.ps1",
+                                     "timeout":  30,
+                                     "type":  "command"
+                                 },
+                      "trigger":  "PostFileSave"
+                  }
+              ]
+}

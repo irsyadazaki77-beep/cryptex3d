@@ -35,7 +35,10 @@ function cspPlugin(): Plugin {
 export default defineConfig({
   plugins: [react(), tailwindcss(), cspPlugin()],
   build: {
-    chunkSizeWarningLimit: 600,
+    // The lazy `three` vendor chunk (core + post-processing addons) is ~610 kB minified, ~153 kB gzip.
+    chunkSizeWarningLimit: 700,
+    // Never inline assets: data: URIs for fonts/images are blocked by the strict CSP.
+    assetsInlineLimit: 0,
     rollupOptions: {
       output: {
         manualChunks(id: string) {
@@ -45,6 +48,7 @@ export default defineConfig({
             if (/node_modules\/@huggingface\//.test(id)) return 'auditor-ml';
             if (/node_modules\/qrcode\//.test(id)) return 'p2p-qr';
             if (/node_modules\/tailwindcss\//.test(id)) return 'tailwind';
+            if (/node_modules\/@fontsource/.test(id)) return undefined; // CSS only; emitted with the entry CSS
             return undefined;
           }
           if (/\.worker\.[tj]s/.test(id) || /\/src\/core\/(crypto|stego|auditor)\//.test(id)) {

@@ -44,3 +44,19 @@ export function extract(carrierBuffer: Uint8ClampedArray): Uint8Array {
   const bitstream = readBytes(carrierBuffer, bitstreamSize(length));
   return parseBitstream(bitstream);
 }
+
+/**
+ * Number of carrier LSB bits occupied by a Cryptex3D payload (magic + length + payload + checksum),
+ * or null when the carrier holds no valid header. Reads the 12-byte header only; it does not
+ * verify the checksum or decrypt anything. Used to draw the X-Ray payload extent.
+ */
+export function readPayloadExtentBits(carrierBuffer: Uint8ClampedArray): number | null {
+  const availableBits = Math.floor(carrierBuffer.length / 4) * 3;
+  if (availableBits < HEADER_SIZE * 8) return null;
+  const header = readBytes(carrierBuffer, HEADER_SIZE);
+  if (!hasValidMagic(header)) return null;
+  const length = readPayloadLength(header);
+  if (length > MAX_PAYLOAD_BYTES) return null;
+  const bits = bitstreamSize(length) * 8;
+  return bits <= availableBits ? bits : null;
+}

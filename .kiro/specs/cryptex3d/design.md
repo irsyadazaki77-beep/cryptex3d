@@ -606,3 +606,11 @@ Located in `tests/integration/`. Drive the full pipeline through Worker message 
 | `qrcode` | QR code generation for SDP | Lightweight, no native deps |
 | `@huggingface/transformers` | Optional ML heuristic auditor | Loaded lazily; zero-dep fallback available |
 | `typescript` | Type safety | strict mode |
+
+## Appendix: Visual, UX and 3D Overhaul
+
+- **UI**: `CommandDock` (tabs + Zen), `SpatialKeyDisplay` (ring angles + 64-char hash), `DemoModeOrchestrator` (stepper from `demoSteps.ts`), `AuditPanel` (undetectability gauge, chi-square / entropy / LSB-pair bars, density advice from `auditMetrics.ts`), `P2PPanel` (BroadcastChannel status badge and **Open Receiver Tab**).
+- **Scene**: bloom post-processing with adaptive downgrade, FogExp2, rune floor grid and pedestals, three-point + cyan rim lighting, idle levitation, hover glow, ring lock-in pulse, context-loss recovery.
+- **Invariants unchanged**: AES-256-GCM, PBKDF2-SHA-256 (310 000 iterations), salt bound to passphrase + Spatial Key, bitstream layout, 250 KB cap, carrier textures with `NoColorSpace`, no mipmaps, nearest filtering (`carrierTexture.ts`).
+- **Data model**: `AuditReport.lsbPairAnomaly` (optional, 0-1) added so the UI can show payload density.
+- **Tests added**: `adaptiveQuality`, `ringLockIn`, `demoSteps`, `auditMetrics`.

@@ -7,13 +7,19 @@
  * Requests (kind 'request', target 'stego'):
  *   op 'embed'   payload { carrierPNG, ciphertext, iv, salt, tag } -> response { stegoCarrier }
  *   op 'extract' payload { carrierPNG }                            -> response { ciphertext, iv, salt, tag }
+ *   op 'embedRaw'     { carrierPNG, record } -> { stegoCarrier }   (Horcrux shard 1, PNG LSB)
+ *   op 'extractRaw'   { carrierPNG }         -> { record }
+ *   op 'embedAudio'   { record }             -> { wav }            (Horcrux shard 2, synthesized WAV LSB)
+ *   op 'extractAudio' { wav }                -> { record }
+ *   op 'inspect'      { carrierPNG }         -> { pixels, width, height, payloadBits }  (X-Ray preview)
  *
  * Carriers should be fully opaque: canvas round-trips may alter RGB of pixels with alpha < 255,
  * which would corrupt LSBs.
  */
 import type { WorkerErrorCode, WorkerMessage } from '../../store/types';
 import { embed, PayloadTooLargeError, CarrierCapacityError } from './LSBEmbedder';
-import { extract, BadMagicError, ChecksumFailError } from './LSBExtractor';
+import { extract, readPayloadExtentBits, BadMagicError, ChecksumFailError } from './LSBExtractor';
+import { InvalidWavError, embedInWav, extractFromWav, synthesizeCarrierFor } from './audioStego';
 import { packPayload, unpackPayload, PackFormatError } from './payloadPacking';
 import { CARRIER_SIZE, InvalidCarrierError, decodePNG } from '../shared/pngDecode';
 
@@ -37,6 +43,36 @@ export interface ExtractResponsePayload {
   iv: Uint8Array;
   salt: Uint8Array;
   tag: Uint8Array;
+}
+
+export interface EmbedRawRequestPayload {
+  carrierPNG: Uint8Array;
+  record: Uint8Array;
+}
+
+export interface ExtractRawResponsePayload {
+  record: Uint8Array;
+}
+
+export interface EmbedAudioRequestPayload {
+  record: Uint8Array;
+}
+
+export interface EmbedAudioResponsePayload {
+  wav: Uint8Array;
+}
+
+export interface ExtractAudioRequestPayload {
+  wav: Uint8Array;
+}
+
+export interface InspectResponsePayload {
+  /** Raw RGBA, 1024x1024. */
+  pixels: Uint8ClampedArray;
+  width: number;
+  height: number;
+  /** LSB bits used by a Cryptex3D payload, or null when the carrier has none. */
+  payloadBits: number | null;
 }
 
 export type StegoReply = WorkerMessage;
@@ -71,6 +107,41 @@ async function handleExtract(id: string, p: ExtractRequestPayload): Promise<Steg
   return { kind: 'response', id, target: 'stego', op: 'extract', payload };
 }
 
+async function handleEmbedRaw(id: string, p: EmbedRawRequestPayload): Promise<StegoReply> {
+  const pixels = await decodePNG(p.carrierPNG);
+  const stegoCarrier = await encodePNG(embed(pixels, p.record));
+  const payload: EmbedResponsePayload = { stegoCarrier };
+  return { kind: 'response', id, target: 'stego', op: 'embedRaw', payload };
+}
+
+async function handleExtractRaw(id: string, p: ExtractRequestPayload): Promise<StegoReply> {
+  const pixels = await decodePNG(p.carrierPNG);
+  const payload: ExtractRawResponsePayload = { record: extract(pixels) };
+  return { kind: 'response', id, target: 'stego', op: 'extractRaw', payload };
+}
+
+function handleEmbedAudio(id: string, p: EmbedAudioRequestPayload): StegoReply {
+  const carrier = synthesizeCarrierFor(p.record.byteLength);
+  const payload: EmbedAudioResponsePayload = { wav: embedInWav(carrier, p.record) };
+  return { kind: 'response', id, target: 'stego', op: 'embedAudio', payload };
+}
+
+function handleExtractAudio(id: string, p: ExtractAudioRequestPayload): StegoReply {
+  const payload: ExtractRawResponsePayload = { record: extractFromWav(p.wav) };
+  return { kind: 'response', id, target: 'stego', op: 'extractAudio', payload };
+}
+
+async function handleInspect(id: string, p: ExtractRequestPayload): Promise<StegoReply> {
+  const pixels = await decodePNG(p.carrierPNG);
+  const payload: InspectResponsePayload = {
+    pixels,
+    width: CARRIER_SIZE,
+    height: CARRIER_SIZE,
+    payloadBits: readPayloadExtentBits(pixels),
+  };
+  return { kind: 'response', id, target: 'stego', op: 'inspect', payload };
+}
+
 /** Pure message handler; testable without a Worker. Never throws. */
 export async function handleStegoMessage(msg: WorkerMessage): Promise<StegoReply> {
   if (msg.kind !== 'request' || msg.target !== 'stego') {
@@ -82,6 +153,16 @@ export async function handleStegoMessage(msg: WorkerMessage): Promise<StegoReply
         return await handleEmbed(msg.id, msg.payload as EmbedRequestPayload);
       case 'extract':
         return await handleExtract(msg.id, msg.payload as ExtractRequestPayload);
+      case 'embedRaw':
+        return await handleEmbedRaw(msg.id, msg.payload as EmbedRawRequestPayload);
+      case 'extractRaw':
+        return await handleExtractRaw(msg.id, msg.payload as ExtractRequestPayload);
+      case 'embedAudio':
+        return handleEmbedAudio(msg.id, msg.payload as EmbedAudioRequestPayload);
+      case 'extractAudio':
+        return handleExtractAudio(msg.id, msg.payload as ExtractAudioRequestPayload);
+      case 'inspect':
+        return await handleInspect(msg.id, msg.payload as ExtractRequestPayload);
       default:
         return errorReply(msg.id, msg.op, 'INVALID_INPUT', 'Unknown operation');
     }
@@ -94,7 +175,7 @@ export async function handleStegoMessage(msg: WorkerMessage): Promise<StegoReply
     if (e instanceof CarrierCapacityError) {
       return errorReply(msg.id, msg.op, 'CARRIER_CAPACITY_EXCEEDED', 'CARRIER_CAPACITY_EXCEEDED');
     }
-    if (e instanceof InvalidCarrierError || e instanceof PackFormatError) {
+    if (e instanceof InvalidCarrierError || e instanceof PackFormatError || e instanceof InvalidWavError) {
       return errorReply(msg.id, msg.op, 'INVALID_INPUT', 'Invalid input');
     }
     // Generic: never forward e.message.
